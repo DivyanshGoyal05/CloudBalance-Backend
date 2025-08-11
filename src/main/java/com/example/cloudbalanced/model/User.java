@@ -41,8 +41,11 @@ public class User {
 
     private Date lastActive;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+
+ @Column(updatable = false, insertable = false)
+ @Temporal(TemporalType.TIMESTAMP)
+ private Date createdAt;
+
 
     @Override
     public String toString() {
@@ -57,50 +60,7 @@ public class User {
                 '}';
     }
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = new Date();
-    }
-
     public enum UserRole {
         ADMIN, READONLY, CUSTOMER
     }
 }
-
-
-//@Entity
-//@Table(name = "users")
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//public class User {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//
-//    @Column(unique = true, nullable = false)
-//    private String username;
-//
-//    @Column(nullable = false)
-//    private String password;
-//
-//    private String name;
-//
-//    @Enumerated(EnumType.STRING)
-//    private UserRole role;
-//
-//
-//
-//    //set kyu???? list kyu nhi??
-//
-//    private Date lastActive;
-//
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date createdAt;
-//
-//    @PrePersist
-//    protected void onCreate() {
-//        createdAt = new Date();
-//    }
-//
-//}

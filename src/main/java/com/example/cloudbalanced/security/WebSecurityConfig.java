@@ -45,28 +45,6 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated() // Sabhi requests ke liye authentication maangein
                 );
 
-
-//        http.csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(auth -> auth
-////                        .requestMatchers("/auth/**").permitAll()
-//                        .requestMatchers("/api/auth/**").permitAll()
-//                        .anyRequest().authenticated()
-//                        sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//
-//                );
-
-
-
-//
-//                http.csrf().disable()
-//                .cors().and()
-//                .authorizeHttpRequests()
-//                .requestMatchers("/auth/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); ///iska matlab dekhna h
-
-        // Add JWT token filter
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         //extract token here
 
@@ -76,7 +54,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5174"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -85,27 +63,11 @@ public class WebSecurityConfig {
         return source;
     }
 
-//    @Bean
-//    public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
-//        var config = new org.springframework.web.cors.CorsConfiguration();
-//        config.addAllowedOrigin("http://localhost:5177");
-//        config.addAllowedHeader("*");
-//        config.addAllowedMethod("*");
-//        config.setAllowCredentials(true);
-//
-//        var source = new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", config);
-//        return source;
-//    }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
 
         return authConfig.getAuthenticationManager();
     }
-
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
