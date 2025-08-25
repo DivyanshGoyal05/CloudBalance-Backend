@@ -41,7 +41,8 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable()) // CSRF protection ko disable karein
                 .cors(cors -> cors.configurationSource((corsConfigurationSource()))) // CORS ko disable karein
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/login").permitAll()
+                        .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/api/register").permitAll()
                         .anyRequest().authenticated() // Sabhi requests ke liye authentication maangein
                 );
 
