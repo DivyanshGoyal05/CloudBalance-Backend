@@ -2,10 +2,7 @@
 FROM eclipse-temurin:17-jdk AS build
 
 WORKDIR /app
-COPY ../../ /app
-
-# Move to Gradle project dir
-WORKDIR /app/Backend/CloudBalance-Backend
+COPY . /app
 
 # Ensure Gradle wrapper is executable (Linux)
 RUN chmod +x gradlew
@@ -24,7 +21,7 @@ RUN --mount=type=cache,id=gradle-cache,target=/root/.gradle \
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 
-COPY --from=build /app/Backend/CloudBalance-Backend/build/libs/*-SNAPSHOT.jar app.jar
+COPY --from=build /app/build/libs/*-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/app.jar"]
