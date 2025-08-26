@@ -72,14 +72,11 @@ public class DtoConverter {
     public static UserDto convertUserToDto(User user) {
         Set<String> accountIds = Collections.emptySet();
 
-//        if (user.getAssignedAccounts() != null && !user.getAssignedAccounts().isEmpty()) {
-//            Set<CloudAccount> accounts = new HashSet<>(user.getAssignedAccounts()); // Defensive copy
-//
-//            accountIds = accounts.stream()
-//                    .map(CloudAccount::getAccountId)
-//                    .collect(Collectors.toSet());
-//
-//        }
+        if (user.getAssignedAccounts() != null && !user.getAssignedAccounts().isEmpty()) {
+            accountIds = user.getAssignedAccounts().stream()
+                    .map(CloudAccount::getAccountId)
+                    .collect(Collectors.toSet());
+        }
 
         return new UserDto(
                 user.getId(),

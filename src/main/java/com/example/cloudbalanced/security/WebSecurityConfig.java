@@ -1,7 +1,5 @@
 package com.example.cloudbalanced.security;
 
-import lombok.extern.flogger.Flogger;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +37,8 @@ public class WebSecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable()) // CSRF protection ko disable karein
-                .cors(cors -> cors.configurationSource((corsConfigurationSource()))) // CORS ko disable karein
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS configuration
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/register").permitAll()

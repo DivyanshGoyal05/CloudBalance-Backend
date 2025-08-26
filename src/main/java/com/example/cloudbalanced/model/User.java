@@ -42,10 +42,14 @@ public class User {
     private Date lastActive;
 
 
- @Column(updatable = false, insertable = false)
+ @Column(updatable = false)
  @Temporal(TemporalType.TIMESTAMP)
  private Date createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
 
     @Override
     public String toString() {
