@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Make sure the script is executable
+chmod +x "$0"
+
 #
 # Copyright © 2015-2021 the original authors.
 #

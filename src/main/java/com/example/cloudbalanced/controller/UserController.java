@@ -24,7 +24,7 @@ import java.util.List;
       private UserService userService;
 
       @GetMapping("/all")
-//      @PreAuthorize("hasRole('ADMIN')")
+      @PreAuthorize("hasRole('ADMIN')")
       public ResponseEntity<List<UserDto>> getAllUsers() {
          return ResponseEntity.ok(userService.getAllUsers());
       }
@@ -38,7 +38,7 @@ import java.util.List;
       }
 
       @PostMapping("/create")
-//      @PreAuthorize("hasRole('ADMIN')")
+      @PreAuthorize("hasRole('ADMIN')")
       public ResponseEntity<?> createUser(@RequestBody UserCreationDto userCreationDto) {
          try {
             return ResponseEntity.ok(userService.createUser(userCreationDto));

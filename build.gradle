@@ -43,3 +43,13 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// Ensure the JAR is executable
+jar {
+	enabled = false
+}
+
+bootJar {
+	enabled = true
+	archiveClassifier = ''
