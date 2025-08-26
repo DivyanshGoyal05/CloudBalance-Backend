@@ -14,7 +14,7 @@ RUN ./gradlew --version
 RUN test -f src/main/java/com/example/cloudbalanced/dto/RegisterRequest.java || (echo "Missing RegisterRequest.java" && ls -la src/main/java/com/example/cloudbalanced/dto && exit 1)
 
 # Build (skip tests for faster image on CI; adjust as needed)
-RUN --mount=type=cache,id=gradle-cache,target=/root/.gradle \
+RUN --mount=type=cache,target=/root/.gradle \
     ./gradlew clean build -x test -x check --stacktrace --info
 
 # ---- Run stage ----
